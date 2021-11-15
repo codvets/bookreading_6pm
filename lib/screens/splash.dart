@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:flutter/services.dart' show rootBundle;
+
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -13,16 +15,23 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
+    loadUsers();
     Future.delayed(Duration(seconds: 2), () {
       Navigator.of(context).pushNamed(Home.routeName);
     });
     super.initState();
   }
 
+  late String data;
+
+  Future<void> loadUsers() async {
+    this.data = await rootBundle.loadString("assets/data/users.json");
+    print(data.runtimeType);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFBEAED),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

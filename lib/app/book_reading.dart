@@ -15,6 +15,9 @@ class BookReading extends StatelessWidget {
         },
         Home.routeName: (context) => Home()
       },
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xFFFBEAED),
+      ),
     );
   }
 }
