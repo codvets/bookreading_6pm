@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:book_reading/model/user.dart';
 import 'package:book_reading/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,7 +29,30 @@ class _SplashState extends State<Splash> {
 
   Future<void> loadUsers() async {
     this.data = await rootBundle.loadString("assets/data/users.json");
-    print(data.runtimeType);
+
+    // print(data);
+
+    final Map<String, dynamic> structuredData = jsonDecode(data);
+
+    final Map<String, dynamic> userRawData = structuredData["users"]["123456"];
+
+    final User user = User.fromJson(userRawData);
+
+    user.books.forEach((book) {
+      print(
+          "BOOK RATING: ${book.rating} Stars. BOOK DESCRIPTION: ${book.details}");
+
+      print("""
+      kasjekjar
+      """);
+
+      print("BOOK CHAPTERS!");
+      book.chapters.forEach((chapter) {
+        print(chapter.title);
+        print(chapter.description);
+        print(chapter.order);
+      });
+    });
   }
 
   @override
